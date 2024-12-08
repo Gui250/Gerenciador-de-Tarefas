@@ -5,13 +5,9 @@ const inputEtiqueta = document.querySelector("#etiqueta");
 const qtdTarefasConcluidas = document.querySelector('.qtd-tarefas');
 let tarefasConcluidas = 1; 
 
-
-
 const atualizarQtdTarefas = () => { 
     qtdTarefasConcluidas.textContent = `${tarefasConcluidas} Tarefa${tarefasConcluidas > 1 ? 's' : ''} concluída${tarefasConcluidas > 1 ? 's' : ''}`;
 }
-
-
 
 btnAdicionar.addEventListener('click', () => { 
     const nome = inputNome.value; 
@@ -20,7 +16,6 @@ btnAdicionar.addEventListener('click', () => {
         const tarefa = document.createElement('div');
         tarefa.classList.add('container-tarefas'); 
 
-   
         tarefa.innerHTML = `
             <div class="conteudo-tarefa">
                 <h3 class="titulo-tarefa">${nome}</h3>
@@ -35,16 +30,12 @@ btnAdicionar.addEventListener('click', () => {
 
         containerTarefas.appendChild(tarefa);
 
- 
         inputNome.value = '';
         inputEtiqueta.value = '';
     }
 });
 
-
-
 containerTarefas.addEventListener('click', (event) => { 
- 
     const btnConcluir = event.target && event.target.classList.contains('concluir');
 
     if (btnConcluir) { 
@@ -52,15 +43,26 @@ containerTarefas.addEventListener('click', (event) => {
         const tituloTarefa = tarefa.querySelector('.titulo-tarefa');
         const checkedImg = tarefa.querySelector('#checked');
 
-
+     
         event.target.style.display = 'none'; 
+
+  
         checkedImg.src = './assets/Checked.png'; 
         checkedImg.style.marginLeft = '12.5rem';  
         checkedImg.style.marginBottom = '29.5px';  
 
+      
         tituloTarefa.classList.add('underline');  
-        
+
+   
         tarefasConcluidas++; 
         atualizarQtdTarefas(); 
+
+      
+        setTimeout(() => {
+            tarefa.parentElement.remove(); 
+            tarefasConcluidas--; 
+            atualizarQtdTarefas(); 
+        }, 3000); 
     }
 });
