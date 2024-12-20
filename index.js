@@ -4,8 +4,22 @@ const tasks = [
     {id: 12, description: 'Implementar protótipo da listagem de tarefas', etiqueta: 'UX', date: 'Criado em: 21/08/2024', checked: true}  // ID único
 ]; 
 
+
+
+const createTask = (event) => { 
+    event.preventDefault();
+    const inputNome = document.getElementsByClassName('nome-tarefa');
+    const inputEtiqueta = document.getElementsByClassName('etiqueta');
+    gerenciadorLista.appendChild(inputNome);
+    gerenciadorLista.appendChild(inputEtiqueta);
+}
+
+
 window.onload = function() { 
     const gerenciadorLista = document.getElementById('gerenciador-lista'); 
+    const btnAdicionar = document.getElementById('adicionar');
+
+    btnAdicionar.addEventListener('click', createTask);
 
     tasks.forEach((task) => { 
         const li = document.createElement('div');
