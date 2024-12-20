@@ -1,7 +1,7 @@
 const tasks = [
     {id: 10, description: 'Implementar tela de listagem de tarefas', etiqueta: 'frontend', date: 'Criado em: 21/08/2024', checked: false},
     {id: 11, description: 'Criar endpoint para cadastro de tarefas', etiqueta: 'backend', date: 'Criado em: 21/08/2024', checked: false},
-    {id: 12, description: 'Implementar protótipo da listagem de tarefas', etiqueta: 'UX', date: 'Criado em: 21/08/2024', checked: true}  // ID único
+    {id: 12, description: 'Implementar protótipo da listagem de tarefas', etiqueta: 'UX', date: 'Criado em: 21/08/2024', checked: false}  
 ]; 
 
 
@@ -30,9 +30,11 @@ window.onload = function() {
         const btnContainer = document.createElement('div');
         const checkbox = document.createElement('button');
         const detailsContainer = document.createElement('div');
-        
+        const checkboxImage = document.createElement('img'); 
 
-        checkbox.textContent = task.checked ? 'Desmarcar' : 'Concluir'; 
+
+
+        checkbox.textContent = 'Concluir'
         checkbox.id = `task-${task.id}`;  
         checkbox.checked = task.checked; 
 
@@ -49,10 +51,6 @@ window.onload = function() {
         btnContainer.classList.add('btn-container');
         checkbox.classList.add('btn-concluir');
         
-      
-        if (task.checked) {
-            description.classList.add('concluida');
-        }
 
 
         details.appendChild(etiqueta);
@@ -66,18 +64,24 @@ window.onload = function() {
 
    
         checkbox.addEventListener('click', function() {
-       
-            description.classList.toggle('concluida');
+            task.checked = !task.checked; 
 
-          
             if (task.checked) {
-                checkbox.textContent = 'Concluir'; 
-            } else {
-                checkbox.textContent = 'Desmarcar'; 
+                description.classList.add('concluida');
+                checkbox.remove('button');
+                checkboxImage.src = 'assets/Checked.png';
+                checkboxImage.style.marginLeft = '30px';
+                btnContainer.appendChild(checkboxImage);
+                
             }
-
+            
             
             task.checked = !task.checked;
+
+
+            setTimeout(() => { 
+                li.remove();
+            }, 2000);
         });
     });
 };
